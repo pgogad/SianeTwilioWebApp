@@ -15,6 +15,6 @@ public class AdvisorRates
 	@Produces(MediaType.TEXT_HTML)
 	public String getRates()
 	{
-		return "5.00";
+		return "3.50";
 	}
 }

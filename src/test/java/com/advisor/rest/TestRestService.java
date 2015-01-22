@@ -12,6 +12,7 @@ import org.junit.Test;
 public class TestRestService
 {
 
+	@SuppressWarnings("resource")
 	@Ignore
 	@Test
 	public void requestWebService()
@@ -51,6 +52,7 @@ public class TestRestService
 		}
 	}
 
+	@SuppressWarnings({ "unused", "resource" })
 	private static String getResponseText(InputStream inStream)
 	{
 		// very nice trick from
