@@ -6,42 +6,69 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.twilio.sdk.verbs.Client;
 import com.twilio.sdk.verbs.Dial;
 import com.twilio.sdk.verbs.TwiMLException;
 import com.twilio.sdk.verbs.TwiMLResponse;
-import com.twilio.sdk.verbs.Verb;
 
 public class SianeTwilioVoiceServlet extends HttpServlet
 {
 	private static final long serialVersionUID = 5848806612938409009L;
 
-	public void service(HttpServletRequest request, HttpServletResponse response) throws IOException
+	public void doPost( HttpServletRequest request, HttpServletResponse response )
 	{
-		String phoneNumber = request.getParameter("PhoneNumber");
-		String callerId = "+15127574974";
-		TwiMLResponse twiml = new TwiMLResponse();
-
-		Dial dial = new Dial();
 		try
 		{
-			if (phoneNumber != null)
-			{
-				Verb verb = new Verb("Client", callerId);
-				dial.append(verb);
-				dial.setCallerId(callerId);
-			}
-			else
-			{
-				dial.append(new Client("jenny"));
-			}
-			twiml.append(dial);
+			createResponseTwiml( request, response );
 		}
-		catch (TwiMLException e)
+		catch ( IOException e )
 		{
-			e.printStackTrace();
+			e.printStackTrace( );
 		}
-		response.setContentType("application/xml");
-		response.getWriter().print(twiml.toXML());
 	}
+
+	public void service( HttpServletRequest request, HttpServletResponse response ) throws IOException
+	{
+		createResponseTwiml( request, response );
+	}
+
+	private void createResponseTwiml( HttpServletRequest request, HttpServletResponse response ) throws IOException
+	{
+		String phoneNumber = request.getParameter( "PhoneNumber" );
+
+		phoneNumber = "+18662226303";
+		// No need to get phone number from client we can set Our number here
+		String timeLimit = request.getParameter( "timeLimit" );
+		String callerId = "+15128616053";
+		TwiMLResponse twiml = new TwiMLResponse( );
+		Dial dial;
+		try
+		{
+			if ( phoneNumber != null )
+			{
+				dial = new Dial( phoneNumber );
+				dial.setCallerId( callerId );
+				dial.setTimeLimit( Integer.valueOf( timeLimit ) );
+				twiml.append( dial );
+			}
+		}
+		catch ( TwiMLException e )
+		{
+			e.printStackTrace( );
+		}
+		response.setContentType( "application/xml" );
+		response.getWriter( ).print( twiml.toXML( ) );
+	}
+
+	// public static void main(String[] args) throws Exception
+	// {
+	// Server server = new Server(Integer.valueOf(System.getenv("PORT")));
+	// ServletContextHandler context = new
+	// ServletContextHandler(ServletContextHandler.SESSIONS);
+	// context.setContextPath("/");
+	// server.setHandler(context);
+	// context.addServlet(new ServletHolder(new SianeTwilioVoiceServlet()),
+	// "/*");
+	// server.start();
+	// server.join();
+	// }
 }
