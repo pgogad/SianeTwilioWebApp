@@ -31,11 +31,6 @@
 			<version>2.3</version>
 		</dependency>
 		<dependency>
-			<groupId>org.postgresql</groupId>
-			<artifactId>postgresql</artifactId>
-			<version>9.3-1100-jdbc41</version>
-		</dependency>
-		<dependency>
 			<groupId>org.json</groupId>
 			<artifactId>json</artifactId>
 			<version>20090211</version>
@@ -79,4 +74,12 @@
 			</plugin>
 		</plugins>
 	</build>
+<!-- 	<repositories>
+		<repository>
+			<id>advisorapp</id>
+			<name>advisorserver</name>
+			<url>file:${project.basedir}/repo</url>
+		</repository>
+	</repositories>
+-->
 </project>

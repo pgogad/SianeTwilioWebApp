@@ -30,6 +30,8 @@ public class PayPalApprovals
 				input.append( line );
 			}
 
+//			Connection conn = DbManager.getInstance( );
+			
 			System.out.println( input.toString( ) );
 		}
 		catch ( Exception e )
