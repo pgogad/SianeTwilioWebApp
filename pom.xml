@@ -35,6 +35,21 @@
 			<artifactId>json</artifactId>
 			<version>20090211</version>
 		</dependency>
+		<dependency>
+			<groupId>mysql</groupId>
+			<artifactId>mysql-connector-java</artifactId>
+			<version>5.1.34</version>
+		</dependency>
+		<dependency>
+			<groupId>org.slf4j</groupId>
+			<artifactId>slf4j-api</artifactId>
+			<version>1.7.10</version>
+		</dependency>
+		<dependency>
+			<groupId>joda-time</groupId>
+			<artifactId>joda-time</artifactId>
+			<version>2.7</version>
+		</dependency>
 	</dependencies>
 
 	<build>
@@ -74,12 +89,6 @@
 			</plugin>
 		</plugins>
 	</build>
-<!-- 	<repositories>
-		<repository>
-			<id>advisorapp</id>
-			<name>advisorserver</name>
-			<url>file:${project.basedir}/repo</url>
-		</repository>
-	</repositories>
--->
+	<!-- <repositories> <repository> <id>advisorapp</id> <name>advisorserver</name> 
+		<url>file:${project.basedir}/repo</url> </repository> </repositories> -->
 </project>
