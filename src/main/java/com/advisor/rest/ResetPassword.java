@@ -17,49 +17,51 @@ import com.advisor.db.DbManager;
 
 @Singleton
 @Path("/")
-public class LoginValidation
+public class ResetPassword
 {
 
-	@Path("/dologin/{username}/{password}")
+	@Path("/resetpassword/{email}/{password}")
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
 	@GET
-	public String doLoggingIn( @PathParam("username") String email, @PathParam("password") String password )
+	public String resetPassword( @PathParam("email") String email, @PathParam("password") String password )
 	{
+		// Email does not exist
+		// Success
 		Connection conn = null;
 		String returnStatement = "Failure";
 		try
 		{
-			String fetch = "SELECT EMAIL_ID, PASSWORD FROM user_name WHERE EMAIL_ID='" + email + "'";
+			String fetch = "SELECT EMAIL_ID, PASSWORD FROM user_name WHERE EMAIL_ID='" + URLDecoder.decode( email, "UTF-8" ) + "'";
 			conn = DbManager.getConnection( );
 			Statement stmt = conn.createStatement( );
 			ResultSet rs = stmt.executeQuery( fetch );
 
 			if ( rs.first( ) )
 			{
-				String emailDB = rs.getString( "EMAIL_ID" );
-				String passwordDB = rs.getString( "PASSWORD" );
 				rs.close( );
-
-				if ( (URLDecoder.decode( email, "UTF-8" )).equals( emailDB ) && (URLDecoder.decode( password, "UTF-8" )).equals( passwordDB ) )
+				String update = "UPDATE user_name SET PASSWORD = '" + URLDecoder.decode( password, "UTF-8" ) + "' WHERE EMAIL_ID='"
+						+ URLDecoder.decode( email, "UTF-8" ) + "'";
+				
+				if(conn.isClosed( ))
 				{
-					returnStatement = "Done";
+					conn = DbManager.getConnection( );
 				}
-				else
-				{
-					returnStatement = "Email address or password did not match";
-				}
+				
+				stmt = conn.createStatement( );
+				stmt.executeUpdate( update );
+				
+				returnStatement = "Success";
 			}
 			else
 			{
-				returnStatement = "Invalid email address";
+				returnStatement = "Email does not exist";
 			}
 
 			if ( !conn.isClosed( ) )
 			{
 				conn.close( );
 			}
-
 		}
 		catch ( Exception ex )
 		{
