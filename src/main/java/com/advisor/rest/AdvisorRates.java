@@ -12,7 +12,7 @@ import javax.ws.rs.core.MediaType;
 public class AdvisorRates
 {
 	@GET
-	@Produces(MediaType.TEXT_HTML)
+	@Produces(MediaType.APPLICATION_JSON)
 	public String getRates()
 	{
 		return "3.50";

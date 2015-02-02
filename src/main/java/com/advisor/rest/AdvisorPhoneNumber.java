@@ -11,7 +11,7 @@ import javax.ws.rs.core.MediaType;
 public class AdvisorPhoneNumber
 {
 	@GET
-	@Produces(MediaType.TEXT_HTML)
+	@Produces(MediaType.APPLICATION_JSON)
 	public String getPhoneNumber()
 	{
 		return "+15127574974";

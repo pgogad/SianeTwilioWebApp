@@ -20,23 +20,21 @@ import com.advisor.db.DbManager;
 public class PayPalApprovals
 {
 	@Consumes(MediaType.APPLICATION_JSON)
-	@Path("/paypalapproval/{payLoad}")
+	@Path("/paypalapproval/{payLoad}/{email}")
 	@GET
-	public String doStoreApprovals( @PathParam("payLoad") String incomingData )
+	public String doStoreApprovals( @PathParam("payLoad") String incomingData, @PathParam("email") String email )
 	{
 		try
 		{
 			try
 			{
-				System.out.println( URLDecoder.decode( incomingData, "UTF-8" ) );
 				Connection conn = DbManager.getConnection( );
-				System.out.println( "========= Database connection created =====================" );
 				Statement stmt = conn.createStatement( );
 
 				DateTime date = new DateTime( );
 				String format = "yyyy-MM-dd HH:mm:ss";
 				String query = "INSERT INTO pay_pal_approval (APPROVAL_OBJ,USER_ID,APPROVAL_DATE ) values( '" + URLDecoder.decode( incomingData, "UTF-8" )
-						+ "','test', '" + date.toString( format ) + "')";
+						+ "','" + URLDecoder.decode( email, "UTF-8" ) + "', '" + date.toString( format ) + "')";
 
 				stmt.execute( query );
 
