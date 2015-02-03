@@ -6,12 +6,12 @@
 	<display-name>Archetype Created Web Application</display-name>
 
 	<servlet>
-		<servlet-name>SianeTwilioServlet</servlet-name>
-		<servlet-class>com.siane.twilio.SianeTwilioServlet</servlet-class>
+		<servlet-name>TwilioServlet</servlet-name>
+		<servlet-class>com.advisor.twilio.SianeTwilioServlet</servlet-class>
 	</servlet>
 	<servlet>
 		<servlet-name>TwilioVoiceServlet</servlet-name>
-		<servlet-class>com.siane.twilio.SianeTwilioVoiceServlet</servlet-class>
+		<servlet-class>com.advisor.twilio.SianeTwilioVoiceServlet</servlet-class>
 	</servlet>
 
 	<servlet>
@@ -31,7 +31,7 @@
 
 
 	<servlet-mapping>
-		<servlet-name>SianeTwilioServlet</servlet-name>
+		<servlet-name>TwilioServlet</servlet-name>
 		<url-pattern>/client</url-pattern>
 	</servlet-mapping>
 
