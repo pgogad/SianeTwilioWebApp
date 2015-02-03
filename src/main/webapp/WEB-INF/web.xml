@@ -7,11 +7,11 @@
 
 	<servlet>
 		<servlet-name>TwilioServlet</servlet-name>
-		<servlet-class>com.advisor.twilio.SianeTwilioServlet</servlet-class>
+		<servlet-class>com.advisor.twilio.AdvisorTwilioServlet</servlet-class>
 	</servlet>
 	<servlet>
 		<servlet-name>TwilioVoiceServlet</servlet-name>
-		<servlet-class>com.advisor.twilio.SianeTwilioVoiceServlet</servlet-class>
+		<servlet-class>com.advisor.twilio.AdvisorTwilioVoiceServlet</servlet-class>
 	</servlet>
 
 	<servlet>

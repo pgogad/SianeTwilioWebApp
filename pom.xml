@@ -1,11 +1,11 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 	<modelVersion>4.0.0</modelVersion>
-	<groupId>com.sianewebapp</groupId>
-	<artifactId>sianetwilioserver</artifactId>
+	<groupId>com.advisorwebapp</groupId>
+	<artifactId>advisortwilioserver</artifactId>
 	<packaging>war</packaging>
 	<version>1.0-SNAPSHOT</version>
-	<name>sianetwilioserver Maven Webapp</name>
+	<name>advisortwilioserver Maven Webapp</name>
 	<url>http://maven.apache.org</url>
 	<dependencies>
 		<dependency>
@@ -53,7 +53,7 @@
 	</dependencies>
 
 	<build>
-		<finalName>sianetwilioserver</finalName>
+		<finalName>advisortwilioserver</finalName>
 		<plugins>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
@@ -89,6 +89,4 @@
 			</plugin>
 		</plugins>
 	</build>
-	<!-- <repositories> <repository> <id>advisorapp</id> <name>advisorserver</name> 
-		<url>file:${project.basedir}/repo</url> </repository> </repositories> -->
 </project>

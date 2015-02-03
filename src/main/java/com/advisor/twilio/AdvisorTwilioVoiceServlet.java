@@ -10,7 +10,7 @@ import com.twilio.sdk.verbs.Dial;
 import com.twilio.sdk.verbs.TwiMLException;
 import com.twilio.sdk.verbs.TwiMLResponse;
 
-public class SianeTwilioVoiceServlet extends HttpServlet
+public class AdvisorTwilioVoiceServlet extends HttpServlet
 {
 	private static final long serialVersionUID = 5848806612938409009L;
 
