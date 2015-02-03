@@ -12,6 +12,7 @@ import javax.ws.rs.PathParam;
 import javax.ws.rs.core.MediaType;
 
 import org.joda.time.DateTime;
+import org.joda.time.DateTimeZone;
 
 import com.advisor.db.DbManager;
 
@@ -20,40 +21,40 @@ import com.advisor.db.DbManager;
 public class PayPalApprovals
 {
 	@Consumes(MediaType.APPLICATION_JSON)
-	@Path("/paypalapproval/{payLoad}/{email}")
+	@Path("/paypalapproval/{payLoad}/{email}/{amount}/{date}")
 	@GET
-	public String doStoreApprovals( @PathParam("payLoad") String incomingData, @PathParam("email") String email )
+	public String doStoreApprovals( @PathParam("payLoad") String approval, @PathParam("email") String email, @PathParam("amount") String amount,
+			@PathParam("date") String insertDate )
 	{
+		String returnStatement = "fail";
 		try
 		{
-			try
+			Connection conn = DbManager.getConnection( );
+			Statement stmt = conn.createStatement( );
+
+			DateTime date = new DateTime(DateTimeZone.UTC);
+			String format = "yyyy-MM-dd HH:mm:ss";
+			String query = "INSERT INTO PAY_PAL_TRANSACTIONS (APPROVAL_OBJ,USER_ID,AMOUNT ,APPROVAL_DATE ,INSERT_DATE) values( '"
+					+ URLDecoder.decode( approval, "UTF-8" ) + "','" 
+					+ URLDecoder.decode( email, "UTF-8" ) + "', '" 
+					+ URLDecoder.decode( amount, "UTF-8" ) + "','" 
+					+ date.toString( format ) + "','" 
+					+ URLDecoder.decode( insertDate, "UTF-8" ) 
+					+ "')";
+
+			stmt.execute( query );
+
+			if ( !conn.isClosed( ) )
 			{
-				Connection conn = DbManager.getConnection( );
-				Statement stmt = conn.createStatement( );
-
-				DateTime date = new DateTime( );
-				String format = "yyyy-MM-dd HH:mm:ss";
-				String query = "INSERT INTO pay_pal_approval (APPROVAL_OBJ,USER_ID,APPROVAL_DATE ) values( '" + URLDecoder.decode( incomingData, "UTF-8" )
-						+ "','" + URLDecoder.decode( email, "UTF-8" ) + "', '" + date.toString( format ) + "')";
-
-				stmt.execute( query );
-
-				if ( !conn.isClosed( ) )
-				{
-					conn.close( );
-				}
+				conn.close( );
 			}
-			catch ( Exception ex )
-			{
-				throw new Exception( "Could not connect to Database ", ex );
-			}
-
+			
+			returnStatement = "Success"; 
 		}
 		catch ( Exception e )
 		{
 			e.printStackTrace( );
-			return "Fail";
 		}
-		return "Success";
+		return returnStatement;
 	}
 }
