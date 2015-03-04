@@ -33,7 +33,7 @@ public class UserRegistration
 		String returnStatement = "Failure";
 		try
 		{
-			String fetch = "SELECT count(*) AS ROWCOUNT FROM user_name WHERE EMAIL_ID='" + email + "'";
+			String fetch = "SELECT count(*) AS ROWCOUNT FROM user_name WHERE EMAIL_ID='" + email.toLowerCase( ) + "'";
 			conn = DbManager.getConnection( );
 			Statement stmt = conn.createStatement( );
 			ResultSet rs = stmt.executeQuery( fetch );
@@ -44,7 +44,7 @@ public class UserRegistration
 
 			if ( count == 0 )
 			{
-				String insert = "INSERT INTO user_name (EMAIL_ID,USER_NAME,PASSWORD) values( '" + URLDecoder.decode( email, "UTF-8" ) + "','"
+				String insert = "INSERT INTO user_name (EMAIL_ID,USER_NAME,PASSWORD) values( '" + URLDecoder.decode( email, "UTF-8" ).toLowerCase( ) + "','"
 						+ URLDecoder.decode( name, "UTF-8" ) + "', '" + URLDecoder.decode( password, "UTF-8" ) + "')";
 				if ( conn.isClosed( ) )
 				{

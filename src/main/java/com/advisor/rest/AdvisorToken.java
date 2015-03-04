@@ -32,7 +32,6 @@ public class AdvisorToken
 		}
 		catch ( UnsupportedEncodingException e )
 		{
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		return generateCapabilityToken( min );
@@ -47,8 +46,7 @@ public class AdvisorToken
 
 		try
 		{
-			int min = Integer.valueOf( minutes );
-			token = capability.generateToken( 60 * min );
+			token = capability.generateToken( 60 );
 		}
 		catch ( DomainException e )
 		{
