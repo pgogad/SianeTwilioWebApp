@@ -15,6 +15,6 @@ public class AdvisorRates
 	@Produces(MediaType.APPLICATION_JSON)
 	public String getRates()
 	{
-		return "3.50";
+		return "3.99";
 	}
 }
